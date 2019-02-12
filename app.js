@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
@@ -19,6 +20,20 @@ app.use((req, res, next ) => {
   }
   next();
 });
+const db = 'mongodb://jensakrom:kDWkA84Mg5BNtpr@cluster0-shard-00-00-9hcoy.mongodb.net:27017,'
+    + 'cluster0-shard-00-01-9hcoy.mongodb.net:27017,'
+    + 'cluster0-shard-00-02-9hcoy.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
+mongoose.connect(db,
+    {
+      useNewUrlParser: true
+    }).then(
+    () => {
+      console.log("Database connected");
+    },
+    err => {
+      /** handle initial connection error */
+      console.log("Error in database connection. ", err);
+    });
 
 //Route
 app.use('/products', productRoutes);
