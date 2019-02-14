@@ -20,6 +20,7 @@ app.use((req, res, next ) => {
   }
   next();
 });
+
 const db = 'mongodb://jensakrom:kDWkA84Mg5BNtpr@cluster0-shard-00-00-9hcoy.mongodb.net:27017,'
     + 'cluster0-shard-00-01-9hcoy.mongodb.net:27017,'
     + 'cluster0-shard-00-02-9hcoy.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
@@ -35,12 +36,13 @@ mongoose.connect(db,
       console.log("Error in database connection. ", err);
     });
 
+mongoose.Promise = global.Promise;
 //Route
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 
 app.use((req, res, next ) => {
-  const error = new Error('Not Found');
+  const error = new Error('Not Found');   
   error.status = 404;
   next(error)
 
