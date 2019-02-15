@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Product = require('../models/product');
+const multer = require('multer');
+const upload = multer({destination:'upload/'});
 
 router.get('/', (req, res, next) => {
   Product.find()
@@ -33,8 +35,8 @@ router.get('/', (req, res, next) => {
       });
 });
 
-router.post('/', (req, res, next) => {
-
+router.post('/', upload.single('productImage'), (req, res, next) => {
+console.log(req.file);
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -60,7 +62,6 @@ router.post('/', (req, res, next) => {
       error : err
     })
   });
-
 });
 
 router.get('/:productId',(req, res, next) => {
@@ -75,7 +76,7 @@ router.get('/:productId',(req, res, next) => {
             product : doc,
             request: {
               type: 'GET',
-              url: 'http://localhost:3000/products/'
+              url: 'http://localhost:3000/products/' + doc._id
             }
           })
         } else {
@@ -102,7 +103,7 @@ router.patch('/:productId',(req, res, next) => {
           message: 'Product Updated',
           request:{
             type:'GET',
-            url: 'http://localhost:3000/product'
+            url: 'http://localhost:3000/products/' + result._id
           }
         })
       })
