@@ -20,7 +20,8 @@ const fileFilter = (req, file, cb) => {
   }else {
     cb(null, false)
   }
-}
+};
+
 const upload = multer({storage: storage, limits:{
   fileSize: 1024 * 1024 * 5,
   fileFilter : fileFilter
@@ -147,7 +148,7 @@ router.delete('/:productId',(req, res, next) => {
       .exec()
       .then(result => {
         res.status(200).json({
-          message: 'Priduct deleted',
+          message: 'Product deleted',
           request: {
             type: 'POST',
             url: 'http://localhost:3000/products/',
