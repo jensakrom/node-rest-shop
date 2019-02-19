@@ -1,5 +1,6 @@
 {
   "env": {
-    "MONGO_ATLAS_PW" : "100%Manfitin83"
+    "MONGO_ATLAS_PW" : "100%Manfitin83",
+    "JWT_KEY": "jensakrom"
   }
 }
