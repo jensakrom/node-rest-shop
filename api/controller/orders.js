@@ -2,6 +2,7 @@ const Order = require('../models/orders');
 const Product = require("../models/product");
 const mongoose = require('mongoose');
 
+//Get all orders
 exports.orders_get_all =  (req, res, next) => {
   Order.find()
       .select('product quantity _id')
@@ -31,6 +32,7 @@ exports.orders_get_all =  (req, res, next) => {
       });
 };
 
+/*create orders*/
 exports.orders_create_orders = (req, res, next) => {
 
   Product.findById(req.body.productId)
@@ -70,6 +72,7 @@ exports.orders_create_orders = (req, res, next) => {
 
 };
 
+/*Get orders by Id*/
 exports.orders_get_order =  (req, res, next) => {
 
   Order.findById(req.params.orderId)
@@ -96,6 +99,7 @@ exports.orders_get_order =  (req, res, next) => {
       });
 };
 
+/*Delete orders By Id*/
 exports.orders_delete_order = (req, res, next) => {
   Order.remove({_id: req.params.orderId})
       .exec()

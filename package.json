@@ -1,7 +1,7 @@
 {
   "name": "rest-shop",
   "version": "1.0.0",
-  "description": "A Node.js Restful API",
+  "description": "A Node.js Restful API for shop",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
@@ -11,7 +11,7 @@
     "REST",
     "API"
   ],
-  "author": "",
+  "author": "jensakrom",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.4",

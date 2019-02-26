@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const mongoose = require('mongoose');
 
+/*get All Products*/
 exports.products_get_all = (req, res, next) => {
   Product.find()
       .select('name price_id productImage')
@@ -32,6 +33,7 @@ exports.products_get_all = (req, res, next) => {
       });
 };
 
+/*Post product*/
 exports.products_create_product =  (req, res, next) => {
   console.log(req.file);
   const product = new Product({
@@ -62,6 +64,7 @@ exports.products_create_product =  (req, res, next) => {
   });
 };
 
+/*Get Product */
 exports.products_get_product = (req, res, next) => {
   const id = req.params.productId;
   Product.findById(id)
@@ -87,6 +90,7 @@ exports.products_get_product = (req, res, next) => {
       })
 };
 
+/*Update Product*/
 exports.products_update_product = (req, res, next) => {
   const id = req.params.productId;
   const updateOps = {};
@@ -116,6 +120,7 @@ exports.products_update_product = (req, res, next) => {
 
 };
 
+/*Delete Products*/
 exports.products_delete_product = (req, res, next) => {
   const id = req.params.productId;
   Product.remove({_id : id})
